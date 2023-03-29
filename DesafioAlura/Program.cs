@@ -8,7 +8,9 @@ var conectionString = builder.Configuration.GetConnectionString("AdoPetConection
 
 builder.Services.AddDbContext<AdoPetContext>(options => options.UseSqlServer(conectionString));
 
-builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //builder.Services.AddSwaggerGen();
 

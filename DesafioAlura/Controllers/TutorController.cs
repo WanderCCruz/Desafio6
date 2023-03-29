@@ -1,5 +1,8 @@
-﻿using DesafioAlura.Context;
+﻿using AutoMapper;
+using DesafioAlura.Context;
+using DesafioAlura.DTos;
 using DesafioAlura.Entidades;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioAlura.Controllers
@@ -9,19 +12,22 @@ namespace DesafioAlura.Controllers
     public class TutorController : ControllerBase
     {
         private AdoPetContext _context;
+        private IMapper _mapper;
 
-        public TutorController(AdoPetContext context)
+        public TutorController(AdoPetContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult AdicionaTutor([FromBody] Tutor tutor)
+        public IActionResult AdicionaTutor([FromBody] CreateTutorDto tutorDTo)
         {
+            Tutor tutor = _mapper.Map<Tutor>(tutorDTo);
             _context.Tutores.Add(tutor);
             _context.SaveChanges();
-            return StatusCode(201);
+            return CreatedAtAction(nameof(RecuperaTutorPorId), new { id = tutor.Id }, tutor);
         }
 
         [HttpGet]
@@ -39,11 +45,27 @@ namespace DesafioAlura.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult AtualizaTutor(int id, [FromBody] Tutor tutorUpdate)
+        public IActionResult AtualizaTutor(int id, [FromBody] UpdateTutorDto updateTutorDTo)
         {
             var tutor = _context.Tutores.FirstOrDefault(t => t.Id == id);
             if (tutor == null) return NotFound();
-            tutor = tutorUpdate;
+            _mapper.Map(updateTutorDTo, tutor);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult AtualizaTutorParcial(int id, JsonPatchDocument <UpdateTutorDto> tutorPatch)
+        {
+            var tutor = _context.Tutores.FirstOrDefault(t => t.Id == id);
+            if (tutor == null) return NotFound();
+
+            var tutorParaAtualizar = _mapper.Map<UpdateTutorDto>(tutor);
+            tutorPatch.ApplyTo(tutorParaAtualizar,ModelState);
+            if (!TryValidateModel(tutorParaAtualizar))
+                return ValidationProblem(ModelState);
+
+            _mapper.Map(tutorParaAtualizar, tutor);
             _context.SaveChanges();
             return NoContent();
         }
