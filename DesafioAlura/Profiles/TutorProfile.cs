@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DesafioAlura.DTos;
+using DesafioAlura.DTOs;
 using DesafioAlura.Entidades;
 
 namespace DesafioAlura.Profiles
@@ -8,9 +8,9 @@ namespace DesafioAlura.Profiles
     {
         public TutorProfile()
         {
-            CreateMap<CreateTutorDto, Tutor>();
-            CreateMap<UpdateTutorDto, Tutor>();
-            CreateMap<Tutor, UpdateTutorDto>();
+            CreateMap<CreateTutorDtO, Tutor>();
+            CreateMap<UpdateTutorDtO, Tutor>();
+            CreateMap<Tutor, UpdateTutorDtO>();
         }
     }
 }

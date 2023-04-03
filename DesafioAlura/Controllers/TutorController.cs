@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DesafioAlura.Context;
-using DesafioAlura.DTos;
+using DesafioAlura.DTOs;
+using DesafioAlura.DTOs;
 using DesafioAlura.Entidades;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace DesafioAlura.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult AdicionaTutor([FromBody] CreateTutorDto tutorDTo)
+        public IActionResult AdicionaTutor([FromBody] CreateTutorDtO tutorDTo)
         {
             Tutor tutor = _mapper.Map<Tutor>(tutorDTo);
             _context.Tutores.Add(tutor);
@@ -45,7 +46,7 @@ namespace DesafioAlura.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult AtualizaTutor(int id, [FromBody] UpdateTutorDto updateTutorDTo)
+        public IActionResult AtualizaTutor(int id, [FromBody] UpdateTutorDtO updateTutorDTo)
         {
             var tutor = _context.Tutores.FirstOrDefault(t => t.Id == id);
             if (tutor == null) return NotFound();
@@ -55,12 +56,12 @@ namespace DesafioAlura.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult AtualizaTutorParcial(int id, JsonPatchDocument <UpdateTutorDto> tutorPatch)
+        public IActionResult AtualizaTutorParcial(int id, JsonPatchDocument <UpdateTutorDtO> tutorPatch)
         {
             var tutor = _context.Tutores.FirstOrDefault(t => t.Id == id);
             if (tutor == null) return NotFound();
 
-            var tutorParaAtualizar = _mapper.Map<UpdateTutorDto>(tutor);
+            var tutorParaAtualizar = _mapper.Map<UpdateTutorDtO>(tutor);
             tutorPatch.ApplyTo(tutorParaAtualizar,ModelState);
             if (!TryValidateModel(tutorParaAtualizar))
                 return ValidationProblem(ModelState);

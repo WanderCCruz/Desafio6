@@ -1,4 +1,6 @@
 using DesafioAlura.Context;
+using DesafioAlura.Interfaces;
+using DesafioAlura.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 var conectionString = builder.Configuration.GetConnectionString("AdoPetConection");
 
 builder.Services.AddDbContext<AdoPetContext>(options => options.UseSqlServer(conectionString));
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

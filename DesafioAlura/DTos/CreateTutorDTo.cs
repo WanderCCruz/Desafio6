@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DesafioAlura.DTos
+namespace DesafioAlura.DTOs
 {
-    public class CreateTutorDto
+    public class CreateTutorDtO
     {
         [Required(ErrorMessage = "O nome é obrigatório")]
         [StringLength(150, ErrorMessage = "O tamanho do nome não pode ultapassar 150 caracteres")]

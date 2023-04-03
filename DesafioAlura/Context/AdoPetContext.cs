@@ -1,4 +1,5 @@
 ﻿using DesafioAlura.Entidades;
+using DesafioAlura.Mapeamento;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesafioAlura.Context
@@ -34,6 +35,7 @@ namespace DesafioAlura.Context
                .IsRequired()
                .HasMaxLength(25);
 
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsuarioEntityTypeConfiguration).Assembly);
         }
     }
 }
