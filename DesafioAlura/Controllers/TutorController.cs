@@ -3,6 +3,9 @@ using DesafioAlura.Context;
 using DesafioAlura.DTOs;
 using DesafioAlura.DTOs;
 using DesafioAlura.Entidades;
+using DesafioAlura.Interfaces;
+using DesafioAlura.Repository;
+using DesafioAlura.Servicos;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,12 +15,12 @@ namespace DesafioAlura.Controllers
     [Route("[Controller]")]
     public class TutorController : ControllerBase
     {
-        private AdoPetContext _context;
+        private IServico<Tutor> _tutorServico;
         private IMapper _mapper;
 
-        public TutorController(AdoPetContext context, IMapper mapper)
+        public TutorController(IServico<Tutor> tutorServico, IMapper mapper)
         {
-            _context = context;
+            _tutorServico = tutorServico;
             _mapper = mapper;
         }
 
@@ -26,21 +29,20 @@ namespace DesafioAlura.Controllers
         public IActionResult AdicionaTutor([FromBody] CreateTutorDtO tutorDTo)
         {
             Tutor tutor = _mapper.Map<Tutor>(tutorDTo);
-            _context.Tutores.Add(tutor);
-            _context.SaveChanges();
+            _tutorServico.Add(tutor);
             return CreatedAtAction(nameof(RecuperaTutorPorId), new { id = tutor.Id }, tutor);
         }
 
         [HttpGet]
         public IEnumerable<Tutor> RecuperarTutores()
         {
-            return _context.Tutores;
+            return _tutorServico.GetAll();
         }
 
         [HttpGet("{id}")]
         public IActionResult RecuperaTutorPorId(int id)
         {
-            var tutor = _context.Tutores.FirstOrDefault(t => t.Id == id);
+            var tutor = _tutorServico.GetAll().FirstOrDefault(t => t.Id == id);
             if (tutor == null) return NotFound();
             return Ok(tutor);
         }
@@ -48,17 +50,16 @@ namespace DesafioAlura.Controllers
         [HttpPut("{id}")]
         public IActionResult AtualizaTutor(int id, [FromBody] UpdateTutorDtO updateTutorDTo)
         {
-            var tutor = _context.Tutores.FirstOrDefault(t => t.Id == id);
+            var tutor = _tutorServico.GetAll().FirstOrDefault(t => t.Id == id);
             if (tutor == null) return NotFound();
-            _mapper.Map(updateTutorDTo, tutor);
-            _context.SaveChanges();
+             _tutorServico.Update(_mapper.Map(updateTutorDTo, tutor));
             return NoContent();
         }
 
         [HttpPatch("{id}")]
         public IActionResult AtualizaTutorParcial(int id, JsonPatchDocument <UpdateTutorDtO> tutorPatch)
         {
-            var tutor = _context.Tutores.FirstOrDefault(t => t.Id == id);
+            var tutor = _tutorServico.GetAll().FirstOrDefault(t => t.Id == id);
             if (tutor == null) return NotFound();
 
             var tutorParaAtualizar = _mapper.Map<UpdateTutorDtO>(tutor);
@@ -66,18 +67,16 @@ namespace DesafioAlura.Controllers
             if (!TryValidateModel(tutorParaAtualizar))
                 return ValidationProblem(ModelState);
 
-            _mapper.Map(tutorParaAtualizar, tutor);
-            _context.SaveChanges();
+            _tutorServico.Update(_mapper.Map(tutorParaAtualizar, tutor));
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteTutor(int id)
         {
-            var tutor = _context.Tutores.FirstOrDefault(t => t.Id == id);
+            var tutor = _tutorServico.GetAll().FirstOrDefault(t => t.Id == id);
             if (tutor == null) return NotFound();
-            _context.Remove(tutor);
-            _context.SaveChanges();
+            _tutorServico.Delete(tutor);
             return NoContent();
         }
     }
