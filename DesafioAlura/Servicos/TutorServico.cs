@@ -36,5 +36,10 @@ namespace DesafioAlura.Servicos
         {
             return _tutorRepository.GetById(id);
         }
+
+        public Tutor GetByEmail(string email)
+        {
+            return _tutorRepository.GetAll().FirstOrDefault(x => x.Email == email);
+        }
     }
 }

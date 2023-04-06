@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DesafioAlura.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
+    [Route("Tutores")]
     public class TutorController : ControllerBase
     {
         private IRepository<Tutor> _repository;
@@ -38,6 +38,9 @@ namespace DesafioAlura.Controllers
         [HttpGet]
         public IEnumerable<Tutor> RecuperarTutores()
         {
+            var tutores = _tutorServico.GetAll();
+            if (!tutores.Any()) 
+                return (IEnumerable<Tutor>)NotFound();
             return _tutorServico.GetAll();
         }
 
@@ -50,15 +53,17 @@ namespace DesafioAlura.Controllers
         }
 
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult AtualizaTutor(int id, [FromBody] UpdateTutorDtO updateTutorDTo)
         {
             var tutor = _tutorServico.GetById(id);
             if (tutor == null) return NotFound();
              _tutorServico.Update(_mapper.Map(updateTutorDTo, tutor));
-            return NoContent();
+            return CreatedAtAction(nameof(RecuperaTutorPorId), new { id = tutor.Id},tutor);
         }
 
         [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult AtualizaTutorParcial(int id, JsonPatchDocument <UpdateTutorDtO> tutorPatch)
         {
             var tutor = _tutorServico.GetById(id);
@@ -70,7 +75,7 @@ namespace DesafioAlura.Controllers
                 return ValidationProblem(ModelState);
 
             _tutorServico.Update(_mapper.Map(tutorParaAtualizar, tutor));
-            return NoContent();
+            return CreatedAtAction(nameof(RecuperaTutorPorId), new { id = tutor.Id, tutor });
         }
 
         [HttpDelete("{id}")]
@@ -80,6 +85,13 @@ namespace DesafioAlura.Controllers
             if (tutor == null) return NotFound();
             _tutorServico.Delete(tutor);
             return NoContent();
+        }
+        [Route("Email")]
+        public IActionResult RecuperaTutorPorEmail(String email)
+        {
+            var tutor = _tutorServico.GetByEmail(email);
+            if (tutor == null) return NotFound();
+            return Ok(tutor);
         }
     }
 }
