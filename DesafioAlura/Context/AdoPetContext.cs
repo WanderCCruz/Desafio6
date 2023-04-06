@@ -12,6 +12,7 @@ namespace DesafioAlura.Context
             
         }
         public DbSet<Tutor> Tutores { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

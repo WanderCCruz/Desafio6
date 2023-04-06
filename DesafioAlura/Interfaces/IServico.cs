@@ -2,7 +2,7 @@
 
 namespace DesafioAlura.Interfaces
 {
-    public interface IServico<T>
+    public interface IServico<T> where T : class
     {
         void Add(T entity);
         void Update(T entity);

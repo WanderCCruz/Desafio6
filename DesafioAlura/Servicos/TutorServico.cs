@@ -3,7 +3,7 @@ using DesafioAlura.Interfaces;
 
 namespace DesafioAlura.Servicos
 {
-    public class TutorServico : IServico<Tutor>
+    public class TutorServico
     {
         private readonly IRepository<Tutor> _tutorRepository;
 

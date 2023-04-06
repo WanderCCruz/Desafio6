@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DesafioAlura.DTOs;
+using DesafioAlura.DTOs.Tutor;
 using DesafioAlura.Entidades;
 
 namespace DesafioAlura.Profiles

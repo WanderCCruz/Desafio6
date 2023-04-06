@@ -13,7 +13,8 @@ var conectionString = builder.Configuration.GetConnectionString("AdoPetConection
 builder.Services.AddDbContext<AdoPetContext>(options => options.UseSqlServer(conectionString));
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped(typeof(IServico<Tutor>),typeof(TutorServico));
+//builder.Services.AddScoped(typeof(IServico<Tutor>),typeof(TutorServico));
+//builder.Services.AddScoped(typeof(IServico<Usuario>),typeof(UsuarioServico));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

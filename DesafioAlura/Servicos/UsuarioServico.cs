@@ -12,27 +12,27 @@ namespace DesafioAlura.Servicos
             _usuarioRepository = usuarioRepository;
         }
 
-        public void AddProduct(Usuario usuario)
+        public void Add(Usuario usuario)
         {
             _usuarioRepository.Add(usuario);
         }
 
-        public void UpdateProduct(Usuario usuario)
+        public void Update(Usuario usuario)
         {
             _usuarioRepository.Update(usuario);
         }
 
-        public void DeleteProduct(Usuario usuario)
+        public void Delete(Usuario usuario)
         {
             _usuarioRepository.Delete(usuario);
         }
 
-        public Usuario GetProductById(int id)
+        public Usuario GetById(int id)
         {
             return _usuarioRepository.GetById(id);
         }
 
-        public IEnumerable<Usuario> GetAllProducts()
+        public IEnumerable<Usuario> GetAll()
         {
             return _usuarioRepository.GetAll();
         }
