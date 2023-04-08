@@ -5,7 +5,7 @@ namespace DesafioAlura.Entidades
     public class Tutor
     {
         
-        public int Id { get; set; }
+        public int Id { get; private set; }
         [Required(ErrorMessage = "O nome é obrigatório")]
         [MaxLength(150, ErrorMessage = "O tamanho do nome não pode ultapassar 150 caracteres")]
         [MinLength(10, ErrorMessage = "O tamanho do nome não pode ser menor que 10 caracteres")]

@@ -8,13 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioAlura.Controllers
 {
+    [ApiController]
+    [Route("Pet")]
     public class PetController : ControllerBase
     {
         private IRepository<Pet> _repository;
         private IMapper _mapper;
         private PetServico _petServico;
 
-        public PetController(IRepository<Pet> repository, IMapper mapper, PetServico perServico)
+        public PetController(IRepository<Pet> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

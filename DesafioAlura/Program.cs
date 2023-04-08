@@ -1,8 +1,13 @@
 using DesafioAlura.Context;
+using DesafioAlura.DTOs.Pet;
 using DesafioAlura.Entidades;
 using DesafioAlura.Interfaces;
 using DesafioAlura.Repository;
 using DesafioAlura.Servicos;
+using DesafioAlura.Validadores;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +23,12 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers().AddNewtonsoftJson().AddFluentValidation(Config =>
+{
+    Config.RegisterValidatorsFromAssembly(typeof(Program).Assembly);
+});
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //builder.Services.AddSwaggerGen();
 
