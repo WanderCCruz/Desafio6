@@ -1,4 +1,5 @@
 ﻿using DesafioAlura.Entidades;
+using DesafioAlura.Mapeamento;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesafioAlura.Context
@@ -11,6 +12,7 @@ namespace DesafioAlura.Context
             
         }
         public DbSet<Tutor> Tutores { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +36,7 @@ namespace DesafioAlura.Context
                .IsRequired()
                .HasMaxLength(25);
 
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsuarioEntityTypeConfiguration).Assembly);
         }
     }
 }
