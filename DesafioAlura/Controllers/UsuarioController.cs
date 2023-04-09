@@ -35,20 +35,23 @@ namespace DesafioAlura.Controllers
         [HttpGet("{id}")]
         public IActionResult RecuperaUsuarioPorId(Guid id)
         {
-            var usuario = _usuarioServico.GetAll().FirstOrDefault(t => t.Id == id);
+            var usuario = _usuarioServico.GetById(id);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }
 
         [HttpGet]
-        public IEnumerable<Usuario> RecuperarUsuarios()
+        public ActionResult<IEnumerable<Usuario>> RecuperarUsuarios()
         {
-            return _usuarioServico.GetAll();
+            var usuarios = _usuarioServico.GetAll();
+            if (!usuarios.Any())
+                return NotFound();
+            return Ok(usuarios);
         }
         [HttpPut("{id}")]
         public IActionResult AtualizaTutor(Guid id, [FromBody] UpdateUsuarioDTO updateUsuarioDTo)
         {
-            var usuario = _usuarioServico.GetAll().FirstOrDefault(t => t.Id == id);
+            var usuario = _usuarioServico.GetById(id);
             if (usuario == null) return NotFound();
             _usuarioServico.Update(_mapper.Map(updateUsuarioDTo, usuario));
             return NoContent();
@@ -57,7 +60,7 @@ namespace DesafioAlura.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUsuario(Guid id)
         {
-            var usuario = _usuarioServico.GetAll().FirstOrDefault(t => t.Id == id);
+            var usuario = _usuarioServico.GetById(id);
             if (usuario == null) return NotFound();
             _usuarioServico.Delete(usuario);
             return NoContent();

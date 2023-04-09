@@ -37,5 +37,9 @@ namespace DesafioAlura.Servicos
         {
             return _petRepository.GetById(id);
         }
+        public Pet GetById(Guid id)
+        {
+            return _petRepository.GetById(id);
+        }
     }
 }

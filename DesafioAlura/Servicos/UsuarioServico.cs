@@ -31,6 +31,10 @@ namespace DesafioAlura.Servicos
         {
             return _usuarioRepository.GetById(id);
         }
+        public Usuario GetById(Guid id)
+        {
+            return _usuarioRepository.GetById(id);
+        }
 
         public IEnumerable<Usuario> GetAll()
         {

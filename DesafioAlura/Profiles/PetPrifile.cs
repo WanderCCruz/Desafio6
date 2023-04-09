@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DesafioAlura.DTOs.Pet;
 using DesafioAlura.DTOs.Tutor;
+using DesafioAlura.DTOs.Usuario;
 using DesafioAlura.Entidades;
 
 namespace DesafioAlura.Profiles
@@ -10,6 +11,7 @@ namespace DesafioAlura.Profiles
         public PetPrifile()
         {
             CreateMap<CreatePetDTO, Pet>();
+            CreateMap<UpdatePetDTO, Pet>();
         }
     }
 }

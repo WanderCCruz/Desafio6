@@ -37,6 +37,11 @@ namespace DesafioAlura.Repository
             return _dbSet.Find(id);
         }
 
+        public T GetById(Guid id)
+        {
+            return _dbSet.Find(id);
+        }
+
         public void Update(T entity)
         {
             _dbSet.Update(entity);

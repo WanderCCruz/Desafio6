@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DesafioAlura.DTOs.Pet;
 using DesafioAlura.DTOs.Tutor;
+using DesafioAlura.DTOs.Usuario;
 using DesafioAlura.Entidades;
 using DesafioAlura.Interfaces;
 using DesafioAlura.Servicos;
@@ -33,11 +34,38 @@ namespace DesafioAlura.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult RecuperaPetPorId(int id)
+        public IActionResult RecuperaPetPorId(Guid id)
         {
             var pet = _petServico.GetById(id);
             if (pet == null) return NotFound();
             return Ok(pet);
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Pet>> RecuperarTutores()
+        {
+            var pet = _petServico.GetAll();
+            if (!pet.Any())
+                return NotFound();
+            return Ok(pet);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult AtualizaPet(Guid id, [FromBody] UpdatePetDTO updatePetDTo)
+        {
+            var pet = _petServico.GetById(id);
+            if (pet == null) return NotFound();
+            _petServico.Update(_mapper.Map(updatePetDTo, pet));
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletePet(Guid id)
+        {
+            var pet = _petServico.GetById(id);
+            if (pet == null) return NotFound();
+            _petServico.Delete(pet);
+            return NoContent();
         }
     }
 }

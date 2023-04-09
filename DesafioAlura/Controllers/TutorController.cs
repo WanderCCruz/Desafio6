@@ -36,12 +36,12 @@ namespace DesafioAlura.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Tutor> RecuperarTutores()
+        public ActionResult<IEnumerable<Tutor>> RecuperarTutores()
         {
             var tutores = _tutorServico.GetAll();
             if (!tutores.Any()) 
-                return (IEnumerable<Tutor>)NotFound();
-            return _tutorServico.GetAll();
+                return NotFound();
+            return Ok(tutores);
         }
 
         [HttpGet("{id}")]
