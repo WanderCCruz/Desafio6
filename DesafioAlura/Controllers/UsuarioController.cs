@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DesafioAlura.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
+    [Route("Usuarios")]
     public class UsuarioController : ControllerBase
     {
         private IMapper _mapper;
