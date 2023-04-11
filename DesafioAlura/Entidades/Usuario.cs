@@ -12,6 +12,7 @@ namespace DesafioAlura.Entidades
         public bool Ativo { get; set; } = true;
         public DateTime DataCriacao { get; set; } = DateTime.Now;
         public string Sobre { get; set; }
+        public virtual Endereco? Endereco { get; set; }
 
     }
 }

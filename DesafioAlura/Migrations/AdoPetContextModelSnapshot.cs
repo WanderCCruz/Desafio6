@@ -62,7 +62,7 @@ namespace DesafioAlura.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pet");
+                    b.ToTable("Pet", (string)null);
                 });
 
             modelBuilder.Entity("DesafioAlura.Entidades.Tutor", b =>
@@ -90,7 +90,7 @@ namespace DesafioAlura.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tutores");
+                    b.ToTable("Tutores", (string)null);
                 });
 
             modelBuilder.Entity("DesafioAlura.Entidades.Usuario", b =>
@@ -130,7 +130,7 @@ namespace DesafioAlura.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 #pragma warning restore 612, 618
         }

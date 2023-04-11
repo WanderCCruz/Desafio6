@@ -17,6 +17,7 @@ namespace DesafioAlura.Mapeamento
             builder.Property(x => x.DataCriacao).HasColumnType("datetime");
             builder.Property(x => x.Sobre).IsRequired().HasColumnType("varchar").HasMaxLength(300);
 
+            builder.Property<int>("EnderecoId");
         }
     }
 }
