@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DesafioAlura.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IDisposable,IRepository<T> where T : class
     {
         private readonly AdoPetContext _adoPetContext;
         private readonly DbSet<T> _dbSet;
@@ -25,6 +25,11 @@ namespace DesafioAlura.Repository
         {
             _dbSet.Remove(entity);
             _adoPetContext.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _adoPetContext.Dispose();
         }
 
         public IEnumerable<T> GetAll()

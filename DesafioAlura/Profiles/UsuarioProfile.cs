@@ -9,7 +9,9 @@ namespace DesafioAlura.Profiles
     {
         public UsuarioProfile()
         {
-            CreateMap<CreateUsuarioDTO, Usuario>();
+            CreateMap<CreateUsuarioDTO, Usuario>()
+                .ForMember(usuarioDTO => usuarioDTO.Endereco, 
+                opt => opt.MapFrom(usuario => usuario.Endereco));
             CreateMap<UpdateUsuarioDTO, Usuario>();
             //CreateMap<Tutor, UpdateTutorDtO>();
         }
