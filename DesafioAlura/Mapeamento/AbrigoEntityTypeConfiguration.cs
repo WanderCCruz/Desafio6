@@ -12,11 +12,6 @@ namespace DesafioAlura.Mapeamento
             builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(150);
 
-            //builder.HasMany(p => p.Pets)
-            //    .WithOne(a => a.Abrigo)
-            //    .HasForeignKey("AbrigoId")
-            //    .IsRequired(false);
-
             builder.HasOne(a => a.Endereco)
                 .WithOne()
                 .HasForeignKey<Abrigo>("EnderecoId").IsRequired();

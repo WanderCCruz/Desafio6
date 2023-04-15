@@ -18,12 +18,11 @@ namespace DesafioAlura.Mapeamento
             builder.Property(x => x.Tamanho).IsRequired();
             builder.Property(x => x.Foto).HasColumnType("varchar");
 
-            // builder.Property<Guid>("AbrigoId");
+            builder.HasOne(e => e.Abrigo)
+            .WithMany(e => e.Pets)
+            .HasForeignKey("AbrigoId")
+            .IsRequired(false);
 
-            //builder.HasOne(e => e.Abrigo)
-            //.WithMany(e => e.Pets)
-            //.HasForeignKey("AbrigoId")
-            //.IsRequired(false);
         }
     }
 }

@@ -13,6 +13,6 @@ namespace DesafioAlura.Entidades
         public DateTime DataCriacao { get; set; } = DateTime.Now;
         public string Sobre { get; set; }
         public virtual Endereco Endereco { get; set; }
-
+        public virtual ICollection<Adocao> Adocoes { get; } = new List<Adocao>();
     }
 }
