@@ -4,6 +4,7 @@ using DesafioAlura.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioAlura.Migrations
 {
     [DbContext(typeof(AdoPetContext))]
-    partial class AdoPetContextModelSnapshot : ModelSnapshot
+    [Migration("20230414021025_enderecos")]
+    partial class enderecos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,27 +45,6 @@ namespace DesafioAlura.Migrations
                         .IsUnique();
 
                     b.ToTable("Abrigos");
-                });
-
-            modelBuilder.Entity("DesafioAlura.Entidades.Adocao", b =>
-                {
-                    b.Property<Guid>("PetId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DataAdocaoInicio")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PetId", "UsuarioId");
-
-                    b.HasIndex("PetId")
-                        .IsUnique();
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Adocao");
                 });
 
             modelBuilder.Entity("DesafioAlura.Entidades.Endereco", b =>
@@ -102,9 +84,6 @@ namespace DesafioAlura.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AbrigoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime");
 
@@ -131,8 +110,6 @@ namespace DesafioAlura.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AbrigoId");
 
                     b.ToTable("Pet");
                 });
@@ -222,34 +199,6 @@ namespace DesafioAlura.Migrations
                     b.Navigation("Endereco");
                 });
 
-            modelBuilder.Entity("DesafioAlura.Entidades.Adocao", b =>
-                {
-                    b.HasOne("DesafioAlura.Entidades.Pet", "Pet")
-                        .WithOne("Adocao")
-                        .HasForeignKey("DesafioAlura.Entidades.Adocao", "PetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DesafioAlura.Entidades.Usuario", "Usuario")
-                        .WithMany("Adocoes")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pet");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("DesafioAlura.Entidades.Pet", b =>
-                {
-                    b.HasOne("DesafioAlura.Entidades.Abrigo", "Abrigo")
-                        .WithMany("Pets")
-                        .HasForeignKey("AbrigoId");
-
-                    b.Navigation("Abrigo");
-                });
-
             modelBuilder.Entity("DesafioAlura.Entidades.Usuario", b =>
                 {
                     b.HasOne("DesafioAlura.Entidades.Endereco", "Endereco")
@@ -259,22 +208,6 @@ namespace DesafioAlura.Migrations
                         .IsRequired();
 
                     b.Navigation("Endereco");
-                });
-
-            modelBuilder.Entity("DesafioAlura.Entidades.Abrigo", b =>
-                {
-                    b.Navigation("Pets");
-                });
-
-            modelBuilder.Entity("DesafioAlura.Entidades.Pet", b =>
-                {
-                    b.Navigation("Adocao")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DesafioAlura.Entidades.Usuario", b =>
-                {
-                    b.Navigation("Adocoes");
                 });
 #pragma warning restore 612, 618
         }

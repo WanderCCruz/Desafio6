@@ -5,6 +5,7 @@
         Novo,
         disponivel,
         Removido,
-        Suspenso
+        Suspenso,
+        Adotado
     }
 }

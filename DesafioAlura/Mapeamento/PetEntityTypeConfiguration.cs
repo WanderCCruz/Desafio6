@@ -1,6 +1,7 @@
 ﻿using DesafioAlura.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Metadata;
 
 namespace DesafioAlura.Mapeamento
 {
@@ -12,11 +13,16 @@ namespace DesafioAlura.Mapeamento
             builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(150);
             builder.Property(x => x.Personalidade).IsRequired().HasColumnType("varchar").HasMaxLength(150);
-            builder.Property(x => x.Cidade).IsRequired().HasColumnType("varchar").HasMaxLength(100);
-            builder.Property(x => x.Estado).HasColumnType("varchar").HasMaxLength(100);
             builder.Property(x => x.DataCriacao).HasColumnType("datetime");
             builder.Property(x => x.Especie).IsRequired();
             builder.Property(x => x.Tamanho).IsRequired();
+            builder.Property(x => x.Foto).HasColumnType("varchar");
+
+            builder.HasOne(e => e.Abrigo)
+            .WithMany(e => e.Pets)
+            .HasForeignKey("AbrigoId")
+            .IsRequired(false);
+
         }
     }
 }

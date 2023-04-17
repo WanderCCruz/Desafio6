@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DesafioAlura.Entidades;
+using System.ComponentModel.DataAnnotations;
 
 namespace DesafioAlura.DTOs.Usuario
 {
@@ -11,5 +12,6 @@ namespace DesafioAlura.DTOs.Usuario
         public bool Ativo { get; set; } = true;
         public DateTime DataCriacao { get; set; } = DateTime.Now;
         public string Sobre { get; set; }
+        public Endereco Endereco { get; set; }
     }
 }
