@@ -1,5 +1,4 @@
 ﻿using DesafioAlura.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace DesafioAlura.Entidades
 {

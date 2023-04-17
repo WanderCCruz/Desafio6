@@ -6,9 +6,9 @@ using DesafioAlura.Entidades;
 
 namespace DesafioAlura.Profiles
 {
-    public class PetPrifile :Profile
+    public class PetProfile :Profile
     {
-        public PetPrifile()
+        public PetProfile()
         {
             CreateMap<CreatePetDTO, Pet>();
             CreateMap<UpdatePetDTO, Pet>();

@@ -12,6 +12,5 @@ namespace DesafioAlura.DTOs.Pet
         public string Personalidade { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
-        //public Tutor? Tutor { get; set;}
     }
 }
