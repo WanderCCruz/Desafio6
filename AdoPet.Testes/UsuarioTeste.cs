@@ -1,6 +1,6 @@
 namespace AdoPet.Testes
 {
-    public class UnitTest1
+    public class UsuarioTeste
     {
         [Fact]
         public void Test1()
