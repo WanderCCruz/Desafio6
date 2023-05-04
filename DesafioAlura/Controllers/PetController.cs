@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using AdoPet.Repository;
+using AutoMapper;
 using DesafioAlura.DTOs.Pet;
 using DesafioAlura.DTOs.Tutor;
 using DesafioAlura.DTOs.Usuario;
 using DesafioAlura.Entidades;
-using DesafioAlura.Interfaces;
 using DesafioAlura.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +13,11 @@ namespace DesafioAlura.Controllers
     [Route("Pets")]
     public class PetController : ControllerBase
     {
-        private IRepository<Pet> _repository;
+        private IRepositoryBase<Pet> _repository;
         private IMapper _mapper;
         private PetServico _petServico;
 
-        public PetController(IRepository<Pet> repository, IMapper mapper)
+        public PetController(IRepositoryBase<Pet> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

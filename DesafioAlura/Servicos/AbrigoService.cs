@@ -1,13 +1,13 @@
-﻿using DesafioAlura.Entidades;
-using DesafioAlura.Interfaces;
+﻿using AdoPet.Repository;
+using DesafioAlura.Entidades;
 
 namespace DesafioAlura.Servicos
 {
     public class AbrigoService
     {
-        private readonly IRepository<Abrigo> _repository;
+        private readonly IRepositoryBase<Abrigo> _repository;
 
-        public AbrigoService(IRepository<Abrigo> repository)
+        public AbrigoService(IRepositoryBase<Abrigo> repository)
         {
             _repository = repository;
         }

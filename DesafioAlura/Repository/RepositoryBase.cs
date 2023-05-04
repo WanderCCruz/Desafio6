@@ -1,15 +1,15 @@
-﻿using DesafioAlura.Context;
-using DesafioAlura.Interfaces;
+﻿using AdoPet.Repository;
+using DesafioAlura.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesafioAlura.Repository
 {
-    public class Repository<T> : IDisposable,IRepository<T> where T : class
+    public class RepositoryBase<T> : IDisposable,IRepositoryBase<T> where T : class
     {
         private readonly AdoPetContext _adoPetContext;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(AdoPetContext adoPetContext)
+        public RepositoryBase(AdoPetContext adoPetContext)
         {
             _adoPetContext = adoPetContext;
             _dbSet = adoPetContext.Set<T>();

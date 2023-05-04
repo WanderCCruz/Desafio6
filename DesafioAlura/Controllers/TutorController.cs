@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿using AdoPet.Repository;
+using AutoMapper;
 using DesafioAlura.Context;
 using DesafioAlura.DTOs.Tutor;
 using DesafioAlura.Entidades;
-using DesafioAlura.Interfaces;
 using DesafioAlura.Repository;
 using DesafioAlura.Servicos;
 using Microsoft.AspNetCore.Http.Metadata;
@@ -15,11 +15,11 @@ namespace DesafioAlura.Controllers
     [Route("Tutores")]
     public class TutorController : ControllerBase
     {
-        private IRepository<Tutor> _repository;
+        private IRepositoryBase<Tutor> _repository;
         private IMapper _mapper;
         private TutorServico _tutorServico;
 
-        public TutorController(IMapper mapper, IRepository<Tutor> repository)
+        public TutorController(IMapper mapper, IRepositoryBase<Tutor> repository)
         {
             _mapper = mapper;
             _repository = repository;

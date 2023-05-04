@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using AdoPet.Repository;
+using AutoMapper;
 using DesafioAlura.DTOs.Abrigo;
 using DesafioAlura.DTOs.Pet;
 using DesafioAlura.DTOs.Usuario;
 using DesafioAlura.Entidades;
-using DesafioAlura.Interfaces;
 using DesafioAlura.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +13,11 @@ namespace DesafioAlura.Controllers
     [Route("Abrigos")]
     public class AbrigoController : ControllerBase
     {
-        private IRepository<Abrigo> _repository;
+        private IRepositoryBase<Abrigo> _repository;
         private IMapper _mapper;
         private AbrigoService _abrigoServico;
 
-        public AbrigoController(IRepository<Abrigo> repository, IMapper mapper)
+        public AbrigoController(IRepositoryBase<Abrigo> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

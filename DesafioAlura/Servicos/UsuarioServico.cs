@@ -3,11 +3,11 @@ using DesafioAlura.Interfaces;
 
 namespace DesafioAlura.Servicos
 {
-    public class UsuarioServico
+    public class UsuarioServico : IServico
     {
-        private readonly IRepository<Usuario> _usuarioRepository;
+        private readonly IRepositoryBase<Usuario> _usuarioRepository;
 
-        public UsuarioServico(IRepository<Usuario> usuarioRepository)
+        public UsuarioServico(IRepositoryBase<Usuario> usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
         }
@@ -27,10 +27,6 @@ namespace DesafioAlura.Servicos
             _usuarioRepository.Delete(usuario);
         }
 
-        public Usuario GetById(int id)
-        {
-            return _usuarioRepository.GetById(id);
-        }
         public Usuario GetById(Guid id)
         {
             return _usuarioRepository.GetById(id);

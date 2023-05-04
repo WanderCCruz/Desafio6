@@ -1,14 +1,14 @@
-﻿using DesafioAlura.Entidades;
-using DesafioAlura.Interfaces;
+﻿using AdoPet.Repository;
+using DesafioAlura.Entidades;
 using DesafioAlura.Migrations;
 
 namespace DesafioAlura.Servicos
 {
     public class PetServico
     {
-        private readonly IRepository<Pet> _petRepository;
+        private readonly IRepositoryBase<Pet> _petRepository;
 
-        public PetServico(IRepository<Pet> petRepository)
+        public PetServico(IRepositoryBase<Pet> petRepository)
         {
             _petRepository = petRepository;
         }

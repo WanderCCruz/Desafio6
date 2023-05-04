@@ -1,13 +1,13 @@
-﻿using DesafioAlura.Entidades;
-using DesafioAlura.Interfaces;
+﻿using AdoPet.Repository;
+using DesafioAlura.Entidades;
 
 namespace DesafioAlura.Servicos
 {
     public class TutorServico
     {
-        private readonly IRepository<Tutor> _tutorRepository;
+        private readonly IRepositoryBase<Tutor> _tutorRepository;
 
-        public TutorServico(IRepository<Tutor> tutorRepository)
+        public TutorServico(IRepositoryBase<Tutor> tutorRepository)
         {
             _tutorRepository = tutorRepository;
         }

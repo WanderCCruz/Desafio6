@@ -13,14 +13,12 @@ namespace DesafioAlura.Controllers
     public class UsuarioController : ControllerBase
     {
         private IMapper _mapper;
-        private readonly IRepository<Usuario> _repository;
-        private readonly UsuarioServico _usuarioServico;
+        private readonly IServico _usuarioServico;
 
-        public UsuarioController(IMapper mapper, IRepository<Usuario> repository)
+        public UsuarioController(IMapper mapper, IServico usuarioServico)
         {
             _mapper = mapper;
-            _repository = repository;
-            _usuarioServico = new UsuarioServico(_repository);
+            _usuarioServico = usuarioServico;
         }
 
         [HttpPost]
@@ -49,7 +47,7 @@ namespace DesafioAlura.Controllers
             return Ok(usuarios);
         }
         [HttpPut("{id}")]
-        public IActionResult AtualizaTutor(Guid id, [FromBody] UpdateUsuarioDTO updateUsuarioDTo)
+        public IActionResult AtualizaUsuario(Guid id, [FromBody] UpdateUsuarioDTO updateUsuarioDTo)
         {
             var usuario = _usuarioServico.GetById(id);
             if (usuario == null) return NotFound();
