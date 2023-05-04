@@ -1,9 +1,10 @@
-﻿using DesafioAlura.Entidades;
-using DesafioAlura.Interfaces;
+﻿using AdoPet.Repository;
+using AdoPet.Servicos.Interfaces;
+using DesafioAlura.Entidades;
 
 namespace DesafioAlura.Servicos
 {
-    public class UsuarioServico : IServico
+    public class UsuarioServico : IUsuarioServico
     {
         private readonly IRepositoryBase<Usuario> _usuarioRepository;
 

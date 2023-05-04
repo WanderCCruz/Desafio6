@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿using AdoPet.Servicos.Interfaces;
+using AutoMapper;
 using DesafioAlura.DTOs.Tutor;
 using DesafioAlura.DTOs.Usuario;
 using DesafioAlura.Entidades;
-using DesafioAlura.Interfaces;
 using DesafioAlura.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +13,9 @@ namespace DesafioAlura.Controllers
     public class UsuarioController : ControllerBase
     {
         private IMapper _mapper;
-        private readonly IServico _usuarioServico;
+        private readonly IUsuarioServico _usuarioServico;
 
-        public UsuarioController(IMapper mapper, IServico usuarioServico)
+        public UsuarioController(IMapper mapper, IUsuarioServico usuarioServico)
         {
             _mapper = mapper;
             _usuarioServico = usuarioServico;

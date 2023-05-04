@@ -19,7 +19,7 @@ var conectionString = builder.Configuration.GetConnectionString("AdoPetConection
 builder.Services.AddDbContext<AdoPetContext>(options => options.UseSqlServer(conectionString));
 
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-builder.Services.AddScoped<IServico,UsuarioServico>();
+builder.Services.AddScoped<IUsuarioServico,UsuarioServico>();
 
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

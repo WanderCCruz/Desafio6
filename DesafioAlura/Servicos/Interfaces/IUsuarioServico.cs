@@ -2,7 +2,7 @@
 
 namespace AdoPet.Servicos.Interfaces
 {
-    public interface IServico
+    public interface IUsuarioServico
     {
         public void Add(Usuario usuario);
 
